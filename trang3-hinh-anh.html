@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiêu chí hình ảnh và truyền thông | The Standard</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Clean Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #10182B;
+      --navy-mid: #1a2540;
+      --navy-light: #243055;
+      --gold: #C9A227;
+      --gold-light: #e0b93a;
+      --cream: #F7F3E9;
+      --cream-dim: #e8e2d4;
+      --text-muted: rgba(247, 243, 233, 0.55);
+      
+      /* Apple-like Transition Easing */
+      --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-slow: all 0.8s var(--ease-apple);
+      --transition-med: all 0.5s var(--ease-apple);
+      --transition-fast: all 0.25s var(--ease-apple);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--navy);
+    }
+
+    body {
+      background-color: var(--navy);
+      color: var(--cream);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.62;
+      letter-spacing: -0.011em;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Selection styling */
+    ::selection {
+      background: rgba(201, 162, 39, 0.25);
+      color: var(--cream);
+    }
+
+    /* --- SLEEK NAV --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 52px;
+      background: rgba(16, 24, 43, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: var(--transition-med);
+    }
+
+    nav.scrolled {
+      background: rgba(16, 24, 43, 0.90);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+      height: 48px;
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: var(--transition-fast);
+    }
+
+    .nav-brand:hover {
+      color: var(--gold-light);
+      opacity: 0.9;
+    }
+
+    .nav-links-container {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+    
+    .nav-links a.active {
+      color: var(--gold);
+      opacity: 1;
+    }
+
+    /* Mobile Hamburger Menu icon */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1010;
+      padding: 10px 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background-color: var(--cream);
+      transition: var(--transition-fast);
+    }
+
+    /* --- PAGE HEADER --- */
+    .page-header {
+      padding: 160px 48px 100px;
+      max-width: 1380px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(247, 243, 233, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header-bg-accent {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: appleFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--cream);
+      max-width: 820px;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: appleFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards;
+    }
+
+    .page-intro {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.62;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: appleFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards;
+    }
+
+    @keyframes appleFadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* --- CONTENT SECTION --- */
+    .content-section {
+      padding: 120px 48px;
+      max-width: 1380px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(247, 243, 233, 0.04);
+    }
+
+    .content-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header-block {
+      max-width: 780px;
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    /* --- APPLE INSIGHT CARD --- */
+    .insight-block {
+      padding: 40px;
+      border-left: 3px solid var(--gold);
+      background: rgba(26, 37, 64, 0.3);
+      border-radius: 0 20px 20px 0;
+      margin-bottom: 80px;
+      border-top: 1px solid rgba(247, 243, 233, 0.03);
+      border-right: 1px solid rgba(247, 243, 233, 0.03);
+      border-bottom: 1px solid rgba(247, 243, 233, 0.03);
+    }
+
+    .insight-block .label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .insight-block .cause {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.58;
+      font-weight: 300;
+    }
+
+    .insight-block .solution {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--cream);
+      line-height: 1.45;
+      font-weight: 400;
+    }
+
+    /* --- CONCEPT & PALETTE BLOCK --- */
+    .concept-block {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .concept-main {
+      background: rgba(26, 37, 64, 0.25);
+      border: 1px solid rgba(247, 243, 233, 0.04);
+      padding: 64px 48px;
+      border-radius: 24px;
+      position: relative;
+    }
+
+    .concept-main::before {
+      content: '“';
+      position: absolute;
+      top: 24px;
+      left: 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      line-height: 1;
+      color: rgba(201, 162, 39, 0.08);
+      pointer-events: none;
+    }
+
+    .concept-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.35;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .concept-explain {
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.68;
+      font-weight: 300;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Color Palette Specs style */
+    .color-palette {
+      background: rgba(26, 37, 64, 0.15);
+      border: 1px solid rgba(247, 243, 233, 0.04);
+      border-radius: 24px;
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .palette-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .swatch-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .swatch {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .swatch-color {
+      height: 96px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      transition: var(--transition-med);
+    }
+
+    .swatch:hover .swatch-color {
+      transform: scale(1.05);
+    }
+
+    .swatch-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-top: 14px;
+      margin-bottom: 2px;
+    }
+
+    .swatch-hex {
+      font-family: SFMono-Regular, Consolas, monospace;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* --- SHOT TYPES GRID --- */
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .shot-card {
+      background: rgba(26, 37, 64, 0.25);
+      border: 1px solid rgba(247, 243, 233, 0.04);
+      padding: 40px 28px;
+      border-radius: 20px;
+      transition: var(--transition-med);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .shot-card:hover {
+      transform: translateY(-8px);
+      background: rgba(26, 37, 64, 0.45);
+      border-color: rgba(201, 162, 39, 0.2);
+    }
+
+    .shot-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: transparent;
+      transition: var(--transition-fast);
+    }
+
+    .shot-card:first-child::before {
+      background: var(--gold);
+    }
+
+    .shot-card:hover::before {
+      background: var(--gold-light);
+    }
+
+    .shot-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .shot-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .shot-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .shot-ratio {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 4px 12px;
+      border: 1px solid rgba(247, 243, 233, 0.08);
+      background: rgba(16, 24, 43, 0.4);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-family: SFMono-Regular, monospace;
+      color: var(--cream-dim);
+    }
+
+    /* --- DISTRIBUTION FLOW TIMELINE --- */
+    .dist-flow {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .dist-step {
+      background: rgba(26, 37, 64, 0.25);
+      border: 1px solid rgba(247, 243, 233, 0.04);
+      padding: 40px 32px;
+      border-radius: 20px;
+      flex: 1;
+      min-width: 220px;
+      transition: var(--transition-med);
+      position: relative;
+    }
+
+    .dist-step:hover {
+      transform: translateY(-6px);
+      background: rgba(26, 37, 64, 0.45);
+      border-color: rgba(201, 162, 39, 0.15);
+    }
+
+    .dist-step.primary-step {
+      background: rgba(201, 162, 39, 0.04);
+      border-color: rgba(201, 162, 39, 0.25);
+    }
+
+    .dist-step.primary-step:hover {
+      background: rgba(201, 162, 39, 0.08);
+    }
+
+    .dist-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(201, 162, 39, 0.15);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: var(--transition-med);
+    }
+
+    .dist-step:hover .dist-num {
+      color: rgba(201, 162, 39, 0.4);
+    }
+
+    .dist-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .dist-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* --- PLATFORMS BENTO GRID --- */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .platform-card {
+      background: rgba(26, 37, 64, 0.25);
+      border: 1px solid rgba(247, 243, 233, 0.04);
+      padding: 44px 32px;
+      border-radius: 24px;
+      transition: var(--transition-med);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .platform-card:hover {
+      transform: translateY(-8px);
+      background: rgba(26, 37, 64, 0.45);
+      border-color: rgba(201, 162, 39, 0.25);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .platform-card.primary::before {
+      background: var(--gold);
+    }
+
+    .platform-card.secondary::before {
+      background: rgba(201, 162, 39, 0.5);
+    }
+
+    .platform-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .platform-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .platform-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.62;
+      font-weight: 300;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .content-types {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(247, 243, 233, 0.05);
+      padding-top: 24px;
+    }
+
+    .ct-item {
+      font-size: 0.82rem;
+      color: var(--cream-dim);
+      line-height: 1.5;
+      font-weight: 300;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .ct-item::before {
+      content: '•';
+      color: rgba(201, 162, 39, 0.4);
+      flex-shrink: 0;
+    }
+
+    /* --- BUSINESS CONNECTION --- */
+    .biz-link-section {
+      padding: 120px 48px;
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(247, 243, 233, 0.04);
+    }
+
+    .biz-link-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .biz-card {
+      padding: 40px;
+      background: var(--navy);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 20px 20px;
+      border-left: 1px solid rgba(247, 243, 233, 0.03);
+      border-right: 1px solid rgba(247, 243, 233, 0.03);
+      border-bottom: 1px solid rgba(247, 243, 233, 0.03);
+      transition: var(--transition-med);
+    }
+
+    .biz-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border-color: rgba(201, 162, 39, 0.2);
+    }
+
+    .biz-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+
+    .biz-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.62;
+      font-weight: 300;
+    }
+
+    /* --- PAGE FOOTER NAV --- */
+    .page-footer {
+      padding: 64px 48px;
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(247, 243, 233, 0.04);
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px;
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      transition: var(--transition-med);
+    }
+
+    .back-btn:hover {
+      background: rgba(201, 162, 39, 0.08);
+      border-color: var(--gold);
+      transform: translateX(-4px);
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      box-shadow: 0 4px 14px rgba(201, 162, 39, 0.2);
+      transition: var(--transition-med);
+    }
+
+    .home-btn:hover {
+      background: var(--gold-light);
+      transform: translateX(4px);
+      box-shadow: 0 6px 18px rgba(201, 162, 39, 0.35);
+    }
+
+    /* --- REVEAL EFFECTS --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- RESPONSIVE STYLE --- */
+    @media (max-width: 1120px) {
+      .shot-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .page-header {
+        padding: 120px 32px 80px;
+      }
+      .content-section, .biz-link-section {
+        padding: 80px 32px;
+      }
+      .concept-block {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .dist-flow {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .biz-link-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .page-footer {
+        padding: 48px 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 24px;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--navy);
+        z-index: 1005;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+      .nav-links-container.open {
+        display: flex;
+      }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      .nav-links a {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .shot-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .platform-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="apple-nav">
+    <a class="nav-brand" href="index.html">GIVEHADA</a>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links-container" id="nav-links-container">
+      <ul class="nav-links">
+        <li><a href="index.html">The Standard</a></li>
+        <li><a href="trang1-muc-tieu.html">Mục tiêu</a></li>
+        <li><a href="trang2-master.html">Master</a></li>
+        <li><a href="trang3-hinh-anh.html" class="active">Hình ảnh</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-bg-accent"></div>
+    <p class="page-eyebrow">Trụ 03 · The Standard</p>
+    <h1 class="page-title">Tiêu chí hình ảnh và truyền thông</h1>
+    <p class="page-intro">
+      Một buổi quay tốt phải nuôi được ba tháng nội dung. Trụ này đặt ra nguyên tắc để mỗi sản xuất đều ra nhiều định dạng, và mỗi nền tảng đều làm đúng một việc.
+    </p>
+  </div>
+
+  <!-- SECTION 1: CONCEPT -->
+  <div class="content-section">
+    <div class="section-header-block reveal">
+      <p class="section-label">Concept xuyên suốt</p>
+      <h2 class="section-heading">Mọi hình ảnh đều trả lời một câu hỏi duy nhất</h2>
+      <p class="section-body">
+        Không phải mọi nội dung hay đều nói cùng một điều. Nhưng mọi nội dung của <strong>GIVEHADA</strong> trong Q3 này đều phải đặt ra một tiêu chuẩn, và chứng minh rằng <strong>GIVEHADA</strong> là hệ thống đặt ra tiêu chuẩn đó.
+      </p>
+    </div>
+
+    <!-- CONCEPT LAYOUT -->
+    <div class="concept-block reveal">
+      <div class="concept-main">
+        <div class="concept-quote">"The Standard"</div>
+        <p class="concept-explain">
+          Câu này không chỉ là slogan. Đây là brief sáng tạo cho từng piece of content. Mỗi podcast, mỗi bestcut, mỗi bài đăng, tất cả đều phải khiến người xem nhận ra: tôi cần một hệ thống, không chỉ cần luyện tập.
+        </p>
+      </div>
+      
+      <!-- Color Swatch Catalog -->
+      <div class="color-palette">
+        <p class="palette-label">Tông màu chiến dịch</p>
+        
+        <!-- Mood board Image -->
+        <div style="margin-top: 16px; margin-bottom: 24px;">
+          <img src="/src/assets/images/mood_board.jpg" alt="Campaign Color Mood board" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+        </div>
+
+        <div class="swatch-row">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #10182B; border: 1px solid rgba(247,243,233,0.1);"></div>
+            <div class="swatch-name">Navy</div>
+            <div class="swatch-hex">#10182B</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #C9A227;"></div>
+            <div class="swatch-name">Gold</div>
+            <div class="swatch-hex">#C9A227</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #F7F3E9;"></div>
+            <div class="swatch-name">Cream</div>
+            <div class="swatch-hex">#F7F3E9</div>
+          </div>
+        </div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; font-weight: 300;">
+          Ba màu này áp dụng nhất quán cho toàn bộ nội dung, từ thumbnail YouTube đến backdrop sự kiện offline. Không có màu bổ sung. Sự nhất quán là thứ tạo ra nhận diện.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SHOT TYPES -->
+  <div class="content-section" style="background: var(--navy-mid);">
+    <!-- INSIGHT BLOCK 1 -->
+    <div class="insight-block reveal" style="background: var(--navy);">
+      <div class="label">Nguyên nhân · Vấn đề cần giải quyết</div>
+      <div class="cause">Quay podcast một góc duy nhất chỉ ra được một định dạng, phải quay lại từ đầu khi cần thêm nội dung.</div>
+      <div class="solution">Giải pháp: Mỗi buổi quay phải thu đủ 4 loại cảnh để ra nhiều định dạng mà không cần sản xuất thêm.</div>
+    </div>
+
+    <div class="section-header-block reveal">
+      <p class="section-label">Khung hình podcast</p>
+      <h2 class="section-heading">Bốn loại cảnh: một buổi quay, nhiều tháng nội dung</h2>
+      <p class="section-body">
+        Mỗi buổi quay podcast phải thu đủ bốn loại cảnh. Không phải để lãng phí, mà để mỗi nền tảng có đúng thứ nó cần, không cần quay thêm.
+      </p>
+    </div>
+
+    <!-- SHOT TYPES GRID -->
+    <div class="shot-grid reveal">
+      <div class="shot-card">
+        <span class="shot-tag">Cảnh chính</span>
+        <div style="margin: 16px 0;">
+          <img src="/src/assets/images/shot_main.jpg" alt="Cảnh chính" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+        </div>
+        <h3 class="shot-title">Trung cảnh: Master nói chuyện</h3>
+        <p class="shot-desc">Cảnh nền, thu toàn bộ cuộc trò chuyện. Góc cố định, ánh sáng studio, nền navy hoặc cream. Dùng cho YouTube full video và Facebook.</p>
+        <span class="shot-ratio">16:9</span>
+      </div>
+      
+      <div class="shot-card">
+        <span class="shot-tag">Cảnh nhấn</span>
+        <div style="margin: 16px 0;">
+          <img src="/src/assets/images/shot_accent.jpg" alt="Cảnh nhấn" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+        </div>
+        <h3 class="shot-title">Cận cảnh: biểu cảm và cảm xúc</h3>
+        <p class="shot-desc">Cắt vào khoảnh khắc Master nói điều quan trọng nhất. Dùng để dựng bestcut ngắn, đây là thứ dừng ngón cái người xem.</p>
+        <span class="shot-ratio">3:4</span>
+      </div>
+      
+      <div class="shot-card">
+        <span class="shot-tag">Cảnh bổ trợ</span>
+        <div style="margin: 16px 0;">
+          <img src="/src/assets/images/shot_broll.jpg" alt="Cảnh bổ trợ" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+        </div>
+        <h3 class="shot-title">B-roll: minh họa</h3>
+        <p class="shot-desc">Tay làm việc, sản phẩm cận, không gian studio, chi tiết nhỏ. Không có b-roll thì bestcut bị lặp góc, xem nhàm sau 10 giây.</p>
+        <span class="shot-ratio">1:1</span>
+      </div>
+      
+      <div class="shot-card">
+        <span class="shot-tag">Cảnh dọc</span>
+        <div style="margin: 16px 0;">
+          <img src="/src/assets/images/shot_vertical.jpg" alt="Cảnh dọc" style="width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 8px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+        </div>
+        <h3 class="shot-title">Dọc riêng: TikTok và Reels</h3>
+        <p class="shot-desc">Phải quay riêng hoặc re-frame từ trung cảnh khi setup. Không cắt ngang từ 16:9: chất lượng thấp, không cạnh tranh được trên feed dọc.</p>
+        <span class="shot-ratio">9:16</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: DISTRIBUTION PRINCIPLES -->
+  <div class="content-section">
+    <div class="section-header-block reveal">
+      <p class="section-label">Nguyên tắc phân phối</p>
+      <h2 class="section-heading">Một buổi quay: nhỏ giọt đủ định dạng đúng thứ tự</h2>
+      <p class="section-body">
+        Nội dung không phân phối theo cảm hứng. Có thứ tự để mỗi piece ra đúng lúc, đúng nền tảng, và không tự cạnh tranh nhau.
+      </p>
+    </div>
+
+    <!-- 16:9 Content Distribution Flow Image -->
+    <div class="reveal" style="margin-bottom: 48px; text-align: center;">
+      <img src="/src/assets/images/distribution_flow.jpg" alt="Luồng phân phối nội dung" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 16px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+    </div>
+
+    <!-- FLOW PATHWAY -->
+    <div class="dist-flow reveal">
+      <div class="dist-step primary-step">
+        <div class="dist-num">01</div>
+        <h3 class="dist-title">Podcast lên YouTube</h3>
+        <p class="dist-desc">Trụ cột: ra trước. Full video, mô tả đầy đủ, thumbnail đúng chuẩn. YouTube là kho lưu trữ dài hạn.</p>
+      </div>
+      
+      <div class="dist-step">
+        <div class="dist-num">02</div>
+        <h3 class="dist-title">5 bestcut nhỏ giọt</h3>
+        <p class="dist-desc">Mỗi bestcut ra một ngày, kéo dài 5 ngày tiếp theo. Không dump tất cả cùng lúc.</p>
+      </div>
+      
+      <div class="dist-step">
+        <div class="dist-num">03</div>
+        <h3 class="dist-title">Bài viết nuôi cộng đồng</h3>
+        <p class="dist-desc">Dựa trên insight từ podcast: viết thành bài nuôi tệp Zalo và Facebook trong tuần.</p>
+      </div>
+      
+      <div class="dist-step">
+        <div class="dist-num">04</div>
+        <h3 class="dist-title">Cảnh dọc TikTok/Reels</h3>
+        <p class="dist-desc">Ra song song với bestcut: cùng ngày hoặc ngay sau. Đây là cửa kéo người lạ vào phễu.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PLATFORM ROLES -->
+  <div class="content-section" style="background: var(--navy-mid);">
+    <!-- INSIGHT BLOCK 2 -->
+    <div class="insight-block reveal" style="background: var(--navy);">
+      <div class="label">Nguyên nhân · Vấn đề cần giải quyết</div>
+      <div class="cause">Đăng cùng một nội dung lên tất cả nền tảng tạo ra sự nhàm chán và bỏ lỡ đặc tính từng kênh: reach thấp, tương tác thấp.</div>
+      <div class="solution">Giải pháp: Mỗi nền tảng có một vai duy nhất, và chỉ nhận nội dung phù hợp với vai đó.</div>
+    </div>
+
+    <div class="section-header-block reveal">
+      <p class="section-label">Vai từng nền tảng</p>
+      <h2 class="section-heading">Bốn nền tảng, bốn vai khác nhau</h2>
+      <p class="section-body">
+        Không có nền tảng nào làm tất cả tốt. Phân vai rõ ràng giúp mỗi kênh hoạt động đúng chức năng và không cạnh tranh nhau trong cùng funnel.
+      </p>
+    </div>
+
+    <!-- 16:9 Four Platforms Roles Image -->
+    <div class="reveal" style="margin-bottom: 48px; text-align: center;">
+      <img src="/src/assets/images/four_platforms.jpg" alt="Bốn nền tảng nội dung" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 16px; border: 1px solid rgba(247, 243, 233, 0.08);" referrerpolicy="no-referrer">
+    </div>
+
+    <!-- PLATFORMS GRID -->
+    <div class="platform-grid reveal">
+      <div class="platform-card primary">
+        <h3 class="platform-name">YouTube</h3>
+        <span class="platform-role">Kho nội dung</span>
+        <p class="platform-desc">Nơi lưu trữ nội dung dài hạn. Không cần viral: cần tìm thấy được. Tối ưu SEO, mô tả đầy đủ, playlist theo chủ đề.</p>
+        <div class="content-types">
+          <div class="ct-item">Podcast đầy đủ (20–45 phút)</div>
+          <div class="ct-item">Bestcut cut từ podcast</div>
+          <div class="ct-item">Playlist theo chủ đề Master</div>
+        </div>
+      </div>
+      
+      <div class="platform-card secondary">
+        <h3 class="platform-name">TikTok · Reels</h3>
+        <span class="platform-role">Cửa kéo người lạ</span>
+        <p class="platform-desc">Nền tảng duy nhất mà người lạ thực sự nhìn thấy <strong>GIVEHADA</strong>. Nội dung phải hook trong 3 giây đầu, không cần giải thích bối cảnh.</p>
+        <div class="content-types">
+          <div class="ct-item">Cảnh dọc 9:16 riêng</div>
+          <div class="ct-item">Hook mạnh, kết luận sắc</div>
+          <div class="ct-item">Không dùng clip cắt ngang từ 16:9</div>
+        </div>
+      </div>
+      
+      <div class="platform-card secondary">
+        <h3 class="platform-name">Zalo</h3>
+        <span class="platform-role">Tệp đã quen</span>
+        <p class="platform-desc">Không cần hào nhoáng. Người trong Zalo đã biết <strong>GIVEHADA</strong>, cần thông tin thực tế, sự kiện sắp tới, và cập nhật Master.</p>
+        <div class="content-types">
+          <div class="ct-item">Thông báo sự kiện và workshop</div>
+          <div class="ct-item">Cập nhật Master tháng này</div>
+          <div class="ct-item">Nội dung hữu ích ngắn, không bán hàng</div>
+        </div>
+      </div>
+      
+      <div class="platform-card">
+        <h3 class="platform-name">Facebook</h3>
+        <span class="platform-role">Nuôi và chuyển đổi</span>
+        <p class="platform-desc">Trung gian giữa người lạ và người mua. Dùng để nuôi bằng bài viết dài, và re-target tệp đã xem podcast hoặc bestcut.</p>
+        <div class="content-types">
+          <div class="ct-item">Bài viết dài, insight thực</div>
+          <div class="ct-item">Re-target tệp đã xem YouTube</div>
+          <div class="ct-item">Ads dẫn về form đăng ký workshop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS CONNECTION -->
+  <div class="biz-link-section">
+    <div class="section-header-block reveal" style="margin-bottom: 0;">
+      <p class="section-label">Trụ 3 kết nối với doanh thu như thế nào</p>
+      <h2 class="section-heading">Nội dung tốt không phải chi phí, là tài sản.</h2>
+    </div>
+    
+    <div class="biz-link-grid reveal">
+      <div class="biz-card">
+        <h4>50 bestcut dùng nhiều quý</h4>
+        <p>20 triệu ngân sách sản xuất tạo ra 50 bestcut và 10 podcast. Những nội dung này không hết hạn sau chiến dịch, chúng tiếp tục nuôi phễu và giảm chi phí sản xuất của Q4.</p>
+      </div>
+      <div class="biz-card">
+        <h4>Phân phối đúng vai = giảm ads cost</h4>
+        <p>TikTok và Reels kéo người lạ organic, giảm áp lực cho 150 triệu ngân sách quảng cáo. YouTube nuôi SEO lâu dài không tốn thêm tiền. Mỗi đồng ads được khuếch đại bởi hệ thống nội dung đúng vai.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERPAGE NAVIGATION -->
+  <div class="page-footer">
+    <a href="trang2-master.html" class="back-btn">Trụ 2: Master</a>
+    <a href="index.html" class="home-btn">Về trang tổng quan</a>
+  </div>
+
+  <!-- Scripts for animations and scroll behavior -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Apple-style Navbar scroll behavior
+      const nav = document.getElementById('apple-nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+
+      // 2. Mobile menu toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinksContainer = document.getElementById('nav-links-container');
+      
+      menuToggle.addEventListener('click', () => {
+        navLinksContainer.classList.toggle('open');
+        menuToggle.classList.toggle('active');
+        
+        const spans = menuToggle.querySelectorAll('span');
+        if (navLinksContainer.classList.contains('open')) {
+          spans[0].style.transform = 'translateY(6px) rotate(45deg)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+        } else {
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+
+      // 3. Apple-style Scroll Reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      reveals.forEach(el => revealObserver.observe(el));
+    });
+  </script>
+</body>
+</html>
